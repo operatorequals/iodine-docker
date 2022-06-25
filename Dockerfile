@@ -37,9 +37,10 @@ RUN apt update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY tinyproxy.conf.template /root/tinyproxy.conf.template
-COPY entrypoint.sh /root/entrypoint.sh
+RUN service tinyproxy stop
 
+COPY entrypoint.sh /root/entrypoint.sh
 RUN chmod 755 /root/entrypoint.sh
 
-CMD /root/entrypoint.sh 
+ENTRYPOINT /root/entrypoint.sh
 
