@@ -1,0 +1,23 @@
+User tinyproxy
+Group tinyproxy
+
+Port ${HTTP_PROXY_PORT}
+
+# Listen to all Interfaces of the Container
+Listen 0.0.0.0
+Timeout 600
+DefaultErrorFile "/usr/share/tinyproxy/default.html"
+StatFile "/usr/share/tinyproxy/stats.html"
+LogFile "/var/log/tinyproxy/tinyproxy.log"
+LogLevel Info
+PidFile "/run/tinyproxy/tinyproxy.pid"
+MaxClients 100
+#
+# Only allow access from Network below (Iodine Virtual Network)
+Allow ${NETWORK}
+Allow localhost
+
+ViaProxyName "tinyproxy"
+ConnectPort 443
+ConnectPort 563
+
