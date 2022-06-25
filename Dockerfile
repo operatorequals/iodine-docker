@@ -42,5 +42,5 @@ RUN service tinyproxy stop
 COPY entrypoint.sh /root/entrypoint.sh
 RUN chmod 755 /root/entrypoint.sh
 
-ENTRYPOINT /root/entrypoint.sh
+ENTRYPOINT ["/root/entrypoint.sh"]
 
