@@ -1,9 +1,10 @@
 #!/bin/bash
-echo "Args: $@"
+echo "Args: '$@'"
 
 echo "-> Interface Devices"
-
 ls /dev/net
+
+envsubst < /root/tinyproxy.conf.template > /etc/tinyproxy/tinyproxy.conf
 
 echo -n "-> Running as: "
 if [ "$SERVER" == "true" ]; then
@@ -11,7 +12,7 @@ if [ "$SERVER" == "true" ]; then
 
 	if [ "$#" -eq "0" ]; then
 		echo "-> Tinyproxy Configuration"
-		envsubst < /root/tinyproxy.conf.template | tee /etc/tinyproxy/tinyproxy.conf
+		cat /etc/tinyproxy/tinyproxy.conf
 		service tinyproxy restart
 
 		echo "-> Iodine Server"
@@ -32,7 +33,7 @@ else
 		export HTTP_PROXY_IP=$(echo "$NETWORK" | cut -d / -f1)
 		export http_proxy=http://${HTTP_PROXY_IP}:${HTTP_PROXY_PORT}
 		echo "-> Trying 'ifconfig.me' to return IP address of the Proxy"
-		export IFCONFIGME="$(curl ifconfig.me)"
+		export IFCONFIGME="$(curl -s ifconfig.me)"
 		echo $IFCONFIGME
 		if [ "$IFCONFIGME" = "$HTTP_PROXY_IP" ]; then
 			echo "-> Connected"
