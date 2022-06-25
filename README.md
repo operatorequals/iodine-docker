@@ -30,11 +30,12 @@ docker run \
 
 ### Manual Mode
 
+Use `-e SERVER=false` for `iodine` - default entrypoint `iodined`
+
 ```bash
 docker run \
-  -e SERVER=false \
   --cap-add=NET_ADMIN --device /dev/net/tun:/dev/net/tun \
-  -ti ghcr.io/operatorequals/iodine-docker:master [iodine-flags]*
+  -ti ghcr.io/operatorequals/iodine-docker:master [iodined-flags]*
 
 ```
 \* for reference on inner workings and `iodine[d]` switches, read the Official Project Readme (https://github.com/yarrick/iodine).
