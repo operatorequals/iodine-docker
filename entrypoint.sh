@@ -13,7 +13,7 @@ if [ "$SERVER" == "true" ]; then
 	service tinyproxy restart
 
 	echo "-> Iodine Server"
-	/iodined -f -p ${DNS_PORT} -u nobody -P ${PASSPHRASE} ${NETWORK} ${DOMAIN} -DD
+	/iodined -c -f -p ${DNS_PORT} -u nobody -P ${PASSPHRASE} ${NETWORK} ${DOMAIN} -DD
         
 else
 	echo client
